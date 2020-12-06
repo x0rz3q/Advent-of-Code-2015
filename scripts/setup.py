@@ -6,7 +6,7 @@ if __name__ == '__main__':
     # Create the repository
 
     date = datetime.datetime.now()
-    day = str(date.day + 1)
+    day = str(date.day)
 
     if len(day) == 1:
         day = '0' + day
@@ -37,17 +37,17 @@ if __name__ == '__main__':
         lines = [line.replace('\n', '') for line in fp.readlines()]
 
     content = [
-            '', 
-            f"build:day-{day}:", 
-            '  stage: build', 
-            '  script:', 
-            f"    - cd day{day}", 
-            '    - cargo build --release', 
-            '', 
-            f"run:day-{day}:", 
-            '  stage: test', 
-            '  script:', 
-            f"    - cd day{day}", 
+            '',
+            f"build:day-{day}:",
+            '  stage: build',
+            '  script:',
+            f"    - cd day{day}",
+            '    - cargo build --release',
+            '',
+            f"run:day-{day}:",
+            '  stage: test',
+            '  script:',
+            f"    - cd day{day}",
             '    - cargo run --release',
             ''
     ]
