@@ -32,3 +32,27 @@ if __name__ == '__main__':
 
     with open(f"day{day}/Cargo.toml", 'w') as fp:
         fp.write('\n'.join(lines))
+
+    with open('.gitlab-ci.yml', 'r') as fp:
+        lines = [line.replace('\n', '') for line in fp.readlines()]
+
+    content = [
+            '', 
+            f"build:day-{day}:", 
+            '  stage: build', 
+            '  script:', 
+            f"    - cd day{day}", 
+            '    - cargo build --release', 
+            '', 
+            f"run:day-{day}:", 
+            '  stage: test', 
+            '  script:', 
+            f"    - cd day{day}", 
+            '    - cargo run --release',
+            ''
+    ]
+
+    lines = lines + content
+
+    with open('.gitlab-ci.yml', 'w') as fp:
+        fp.write('\n'.join(lines))
